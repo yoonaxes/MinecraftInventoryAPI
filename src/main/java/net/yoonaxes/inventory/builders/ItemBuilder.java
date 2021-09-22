@@ -15,9 +15,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Quick and convenient wizard for Bukkit ItemStack.
+ * @author yoonaxes
+ */
 public class ItemBuilder {
 
     private static final MinecraftInventoryAPI MINECRAFT_INVENTORY_API = MinecraftInventoryAPI.INSTANCE;
+
+    private static final ColorTranslator COLOR_TRANSLATOR = MINECRAFT_INVENTORY_API == null
+            ? DefaultColorTranslator.DEFAULT_COLOR_TRANSLATOR
+            : MINECRAFT_INVENTORY_API.getColorTranslator();
 
     private Material material;
     private int amount;
@@ -68,33 +76,40 @@ public class ItemBuilder {
         return this;
     }
 
+    /**
+     * Build a ItemStack.
+     * @return Created ItemStack
+     */
     public ItemStack build() {
-        ColorTranslator translator = MINECRAFT_INVENTORY_API == null
-                ? DefaultColorTranslator.DEFAULT_COLOR_TRANSLATOR
-                : MINECRAFT_INVENTORY_API.getColorTranslator();
-
+        // Create ItemStack and get ItemMeta.
         ItemStack itemStack = new ItemStack(this.material, this.amount);
         ItemMeta itemMeta = itemStack.getItemMeta();
 
+        // Set Durability
         if(this.durability != (short) 0)
             itemStack.setDurability(this.durability);
 
+        // Set Display Name
         if(this.displayName != null)
-            itemMeta.setDisplayName(translator.translateString(this.displayName));
+            itemMeta.setDisplayName(COLOR_TRANSLATOR.translateString(this.displayName));
 
+        // Set Lore
         itemMeta.setLore(
-                translator.translateList(this.loreList)
+                COLOR_TRANSLATOR.translateList(this.loreList)
         );
 
+        // Add Enchantments
         this.enchantmentMap.forEach((enchantment, level) ->
                 itemMeta.addEnchant(enchantment, level, true)
         );
 
+        // Add glow to item
         if(this.glowing) {
             itemMeta.addEnchant(Enchantment.ARROW_INFINITE, 0, true);
             itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
 
+        // Set ItemMeta to return ItemStack.
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

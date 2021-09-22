@@ -4,8 +4,12 @@ import net.yoonaxes.inventory.listeners.InventoryListeners;
 import net.yoonaxes.inventory.translators.ColorTranslator;
 import net.yoonaxes.inventory.translators.defaults.DefaultColorTranslator;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * An open source Bukkit plugin for Inventory API.
+ * This plugin is used to facilitate the creation of interactive inventory.
+ * @author yoonaxes
+ */
 public final class MinecraftInventoryAPI {
 
     public static MinecraftInventoryAPI INSTANCE;
@@ -14,10 +18,15 @@ public final class MinecraftInventoryAPI {
 
     private ColorTranslator colorTranslator;
 
-    public void register(JavaPlugin plugin) {
+    public MinecraftInventoryAPI() {
         INSTANCE = this;
+    }
+
+    public void register(Plugin plugin) {
         this.plugin = plugin;
-        this.colorTranslator = DefaultColorTranslator.DEFAULT_COLOR_TRANSLATOR;
+
+        if(this.colorTranslator == null)
+            this.colorTranslator = DefaultColorTranslator.DEFAULT_COLOR_TRANSLATOR;
 
         plugin.getServer().getPluginManager().registerEvents(
                 new InventoryListeners(),
@@ -25,13 +34,13 @@ public final class MinecraftInventoryAPI {
         );
     }
 
+    public Plugin getPlugin() {
+        return plugin;
+    }
+
     public MinecraftInventoryAPI withTranslator(ColorTranslator colorTranslator) {
         this.colorTranslator = colorTranslator;
         return this;
-    }
-
-    public Plugin getPlugin() {
-        return plugin;
     }
 
     public ColorTranslator getColorTranslator() {
