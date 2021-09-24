@@ -1,13 +1,13 @@
 package net.yoonaxes.inventory;
 
 import net.yoonaxes.inventory.listeners.InventoryListeners;
-import net.yoonaxes.inventory.translators.ColorTranslator;
-import net.yoonaxes.inventory.translators.defaults.DefaultColorTranslator;
+import net.yoonaxes.translator.ColorTranslator;
+import net.yoonaxes.translator.impl.DefaultColorTranslator;
 import org.bukkit.plugin.Plugin;
 
 /**
- * An open source Bukkit plugin for Inventory API.
- * This plugin is used to facilitate the creation of interactive inventory.
+ * An open source Bukkit util for Inventory API.
+ * This API is used to facilitate the creation of interactive inventory.
  * @author yoonaxes
  */
 public final class MinecraftInventoryAPI {

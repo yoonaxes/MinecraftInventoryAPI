@@ -9,13 +9,21 @@ version = '0.1'
 repositories {
     mavenCentral()
     maven {
+        name = 'yoonaxes-maven'
+        url = 'https://maven.yoonaxes.pl/'
+    }
+    maven {
         name = 'spigotmc-repo'
         url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
     }
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+
+    compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.17.1-R0.1-SNAPSHOT'
+
+    implementation group: 'net.yoonaxes', name: 'minecraftcolortranslatorapi', version: '1.0'
+
 }
 
 def targetJavaVersion = 16
@@ -31,15 +39,6 @@ java {
 tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release = targetJavaVersion
-    }
-}
-
-processResources {
-    def props = [version: version]
-    inputs.properties props
-    filteringCharset 'UTF-8'
-    filesMatching('plugin.yml') {
-        expand props
     }
 }
 

@@ -3,8 +3,8 @@ package net.yoonaxes.inventory.builders;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.yoonaxes.inventory.MinecraftInventoryAPI;
-import net.yoonaxes.inventory.translators.ColorTranslator;
-import net.yoonaxes.inventory.translators.defaults.DefaultColorTranslator;
+import net.yoonaxes.translator.ColorTranslator;
+import net.yoonaxes.translator.impl.DefaultColorTranslator;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -27,8 +27,8 @@ public class ItemBuilder {
             ? DefaultColorTranslator.DEFAULT_COLOR_TRANSLATOR
             : MINECRAFT_INVENTORY_API.getColorTranslator();
 
-    private Material material;
-    private int amount;
+    private final Material material;
+    private final int amount;
     private short durability;
 
     private String displayName;
