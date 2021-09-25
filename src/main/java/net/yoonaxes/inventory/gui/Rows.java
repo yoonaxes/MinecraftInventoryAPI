@@ -21,16 +21,44 @@ public enum Rows {
 
     /**
      * Find biggest row by inventory slots size.
-     * @param size Inventory Slots Size
+     * @param slots Inventory Slots Size
      * @return Biggest Row for size
      */
-    public static Rows getRowBySize(int size) {
+    public static Rows getRowBySlots(int slots) {
         Rows row = Rows.ONE;
 
         for(Rows checkedRow : Rows.values())
-            if(size >= checkedRow.getSize())
+            if(slots >= checkedRow.getSize())
                 row = checkedRow;
 
         return row;
+    }
+
+    /**
+     * Find row by number.
+     * @param rows Row number
+     * @return Finded Row
+     */
+    public static Rows getRow(int rows) {
+        switch(rows) {
+            case 1: {
+                return Rows.ONE;
+            }
+            case 2: {
+                return Rows.TWO;
+            }
+            case 3: {
+                return Rows.THREE;
+            }
+            case 4: {
+                return Rows.FOUR;
+            }
+            case 5: {
+                return Rows.FIVE;
+            }
+            default: {
+                return Rows.SIX;
+            }
+        }
     }
 }

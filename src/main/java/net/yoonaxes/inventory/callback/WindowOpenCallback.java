@@ -3,8 +3,7 @@ package net.yoonaxes.inventory.callback;
 import net.yoonaxes.inventory.gui.MenuHolder;
 import org.bukkit.entity.HumanEntity;
 
-@WindowCallback(type = WindowCallback.Type.OPEN)
-public interface WindowOpenCallback {
+public interface WindowOpenCallback extends WindowCallback {
 
     void onWindowOpen(HumanEntity humanEntity, MenuHolder holder);
 

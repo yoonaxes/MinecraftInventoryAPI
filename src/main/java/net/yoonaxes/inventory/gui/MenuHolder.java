@@ -5,7 +5,7 @@ import org.bukkit.inventory.InventoryHolder;
 
 public class MenuHolder implements InventoryHolder {
 
-    private MenuWindow window;
+    private final MenuWindow window;
     private Inventory inventory;
 
     public MenuHolder(MenuWindow window) {

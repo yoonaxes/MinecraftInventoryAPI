@@ -1,6 +1,9 @@
 package net.yoonaxes.inventory;
 
-import net.yoonaxes.inventory.listener.InventoryListeners;
+import net.yoonaxes.inventory.listener.impl.InventoryClickListener;
+import net.yoonaxes.inventory.listener.impl.InventoryCloseListener;
+import net.yoonaxes.inventory.listener.impl.InventoryInteractListener;
+import net.yoonaxes.inventory.listener.impl.InventoryOpenListener;
 import net.yoonaxes.translator.ColorTranslator;
 import net.yoonaxes.translator.impl.DefaultColorTranslator;
 import org.bukkit.plugin.Plugin;
@@ -9,7 +12,6 @@ import org.bukkit.plugin.Plugin;
  * An open source Bukkit util for Inventory API.
  * This API is used to facilitate the creation of interactive inventory.
  * TODO: Clickable Item System
- * TODO: Open/Close Callback Inventory System.
  * @author yoonaxes
  */
 public final class MinecraftInventoryAPI {
@@ -37,10 +39,10 @@ public final class MinecraftInventoryAPI {
         if(this.colorTranslator == null)
             this.colorTranslator = DefaultColorTranslator.DEFAULT_COLOR_TRANSLATOR;
 
-        plugin.getServer().getPluginManager().registerEvents(
-                new InventoryListeners(),
-                plugin
-        );
+        new InventoryOpenListener(plugin);
+        new InventoryCloseListener(plugin);
+        new InventoryClickListener(plugin);
+        new InventoryInteractListener(plugin);
     }
 
     /**

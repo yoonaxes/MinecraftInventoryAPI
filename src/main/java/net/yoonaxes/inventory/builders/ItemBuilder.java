@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.yoonaxes.inventory.MinecraftInventoryAPI;
 import net.yoonaxes.translator.ColorTranslator;
-import net.yoonaxes.translator.impl.DefaultColorTranslator;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -20,6 +19,8 @@ import java.util.Map;
  * @author yoonaxes
  */
 public class ItemBuilder {
+
+    private static final ColorTranslator COLOR_TRANSLATOR = MinecraftInventoryAPI.getColorTranslator();
 
     private final Material material;
     private final int amount;
@@ -86,12 +87,12 @@ public class ItemBuilder {
         // Set Display Name
         if(this.displayName != null)
             itemMeta.setDisplayName(
-                    MinecraftInventoryAPI.getColorTranslator().translateString(this.displayName)
+                    COLOR_TRANSLATOR.translateString(this.displayName)
             );
 
         // Set Lore
         itemMeta.setLore(
-                MinecraftInventoryAPI.getColorTranslator().translateList(this.loreList)
+                COLOR_TRANSLATOR.translateList(this.loreList)
         );
 
         // Add Enchantments
@@ -100,7 +101,7 @@ public class ItemBuilder {
         );
 
         // Add glow to item
-        if(this.glowing) {
+        if(this.glowing && itemMeta.getEnchants().size() == 0) {
             itemMeta.addEnchant(Enchantment.ARROW_INFINITE, 0, true);
             itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
