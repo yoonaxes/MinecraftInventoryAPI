@@ -1,6 +1,6 @@
 package net.yoonaxes.inventory;
 
-import net.yoonaxes.inventory.listeners.InventoryListeners;
+import net.yoonaxes.inventory.listener.InventoryListeners;
 import net.yoonaxes.translator.ColorTranslator;
 import net.yoonaxes.translator.impl.DefaultColorTranslator;
 import org.bukkit.plugin.Plugin;
@@ -8,6 +8,8 @@ import org.bukkit.plugin.Plugin;
 /**
  * An open source Bukkit util for Inventory API.
  * This API is used to facilitate the creation of interactive inventory.
+ * TODO: Clickable Item System
+ * TODO: Open/Close Callback Inventory System.
  * @author yoonaxes
  */
 public final class MinecraftInventoryAPI {
@@ -18,10 +20,17 @@ public final class MinecraftInventoryAPI {
 
     private ColorTranslator colorTranslator;
 
+    /**
+     * Create a new instance
+     */
     public MinecraftInventoryAPI() {
         INSTANCE = this;
     }
 
+    /**
+     * Register this API in your Plugin.
+     * @param plugin Plugin that uses the API
+     */
     public void register(Plugin plugin) {
         this.plugin = plugin;
 
@@ -34,16 +43,39 @@ public final class MinecraftInventoryAPI {
         );
     }
 
+    /**
+     * Select a ColorTranslator method.
+     * @param translator ColorTranslator
+     * @return MinecraftMessageAPI
+     */
+    public MinecraftInventoryAPI withTranslator(ColorTranslator translator) {
+        this.colorTranslator = translator;
+        return this;
+    }
+
+    /**
+     * Get a registerd Plugin method.
+     * @return Registred Plugin
+     */
     public Plugin getPlugin() {
         return plugin;
     }
 
-    public MinecraftInventoryAPI withTranslator(ColorTranslator colorTranslator) {
-        this.colorTranslator = colorTranslator;
-        return this;
+    /**
+     * Get a ColorTranslator method.
+     * @return Selected ColorTranslator
+     */
+    public ColorTranslator getTranslator() {
+        return colorTranslator;
     }
 
-    public ColorTranslator getColorTranslator() {
-        return colorTranslator;
+    /**
+     * Get a ColorTranslator static method.
+     * @return Selected ColorTranslator
+     */
+    public static ColorTranslator getColorTranslator() {
+        return INSTANCE == null
+                ? DefaultColorTranslator.DEFAULT_COLOR_TRANSLATOR
+                : INSTANCE.getTranslator();
     }
 }

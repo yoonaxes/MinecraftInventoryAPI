@@ -9,7 +9,7 @@ public enum Rows {
     FIVE(45),
     SIX(54);
 
-    private int size;
+    private final int size;
 
     Rows(int size) {
         this.size = size;
@@ -17,10 +17,6 @@ public enum Rows {
 
     public int getSize() {
         return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     /**

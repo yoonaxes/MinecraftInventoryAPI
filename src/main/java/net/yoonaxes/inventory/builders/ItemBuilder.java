@@ -21,12 +21,6 @@ import java.util.Map;
  */
 public class ItemBuilder {
 
-    private static final MinecraftInventoryAPI MINECRAFT_INVENTORY_API = MinecraftInventoryAPI.INSTANCE;
-
-    private static final ColorTranslator COLOR_TRANSLATOR = MINECRAFT_INVENTORY_API == null
-            ? DefaultColorTranslator.DEFAULT_COLOR_TRANSLATOR
-            : MINECRAFT_INVENTORY_API.getColorTranslator();
-
     private final Material material;
     private final int amount;
     private short durability;
@@ -91,11 +85,13 @@ public class ItemBuilder {
 
         // Set Display Name
         if(this.displayName != null)
-            itemMeta.setDisplayName(COLOR_TRANSLATOR.translateString(this.displayName));
+            itemMeta.setDisplayName(
+                    MinecraftInventoryAPI.getColorTranslator().translateString(this.displayName)
+            );
 
         // Set Lore
         itemMeta.setLore(
-                COLOR_TRANSLATOR.translateList(this.loreList)
+                MinecraftInventoryAPI.getColorTranslator().translateList(this.loreList)
         );
 
         // Add Enchantments
