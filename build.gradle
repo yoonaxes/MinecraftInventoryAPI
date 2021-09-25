@@ -3,8 +3,8 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'net.yoonaxes'
-version = '0.2'
+group = 'net.yoonaxes.minecraft'
+version = '0.3'
 
 repositories {
     mavenCentral()
@@ -22,7 +22,7 @@ dependencies {
 
     compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.17.1-R0.1-SNAPSHOT'
 
-    implementation group: 'net.yoonaxes', name: 'minecraftcolortranslatorapi', version: '1.0'
+    implementation group: 'net.yoonaxes.minecraft', name: 'colortranslator', version: '1.0'
 
 }
 
@@ -46,7 +46,7 @@ publishing {
     publications {
         maven(MavenPublication) {
             groupId = group
-            artifactId = 'minecraftinventoryapi'
+            artifactId = 'inventoryapi'
             version = version
 
             from components.java
