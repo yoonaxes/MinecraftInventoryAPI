@@ -85,4 +85,7 @@ public class ExampleMenu extends MenuWindow {
 }
 ```
 
+##### Result:
+![](https://i.imgur.com/dqC25rZ.png "Example Screenshot")
+
 <hr />
