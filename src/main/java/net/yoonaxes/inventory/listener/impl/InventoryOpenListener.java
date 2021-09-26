@@ -1,5 +1,6 @@
 package net.yoonaxes.inventory.listener.impl;
 
+import net.yoonaxes.inventory.actions.WindowAction;
 import net.yoonaxes.inventory.callback.WindowOpenCallback;
 import net.yoonaxes.inventory.gui.MenuHolder;
 import net.yoonaxes.inventory.gui.MenuWindow;
@@ -29,6 +30,11 @@ public class InventoryOpenListener extends ListenerHandler<InventoryOpenEvent> {
 
         window.getWindowCallbackList().stream()
                 .filter(windowCallback -> windowCallback instanceof WindowOpenCallback)
-                .forEach(windowCallback -> ((WindowOpenCallback) windowCallback).onWindowOpen(event.getPlayer(), holder));
+                .forEach(windowCallback ->
+                        ((WindowOpenCallback) windowCallback).onWindowOpen(
+                                event.getPlayer(),
+                                new WindowAction(holder, WindowAction.WindowActionType.OPEN)
+                        )
+                );
     }
 }

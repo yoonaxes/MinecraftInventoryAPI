@@ -1,5 +1,6 @@
 package net.yoonaxes.inventory.listener.impl;
 
+import net.yoonaxes.inventory.actions.WindowAction;
 import net.yoonaxes.inventory.callback.WindowCloseCallback;
 import net.yoonaxes.inventory.gui.MenuHolder;
 import net.yoonaxes.inventory.gui.MenuWindow;
@@ -30,6 +31,10 @@ public class InventoryCloseListener extends ListenerHandler<InventoryCloseEvent>
 
         window.getWindowCallbackList().stream()
                 .filter(windowCallback -> windowCallback instanceof WindowCloseCallback)
-                .forEach(windowCallback -> ((WindowCloseCallback) windowCallback).onWindowClose(event.getPlayer(), holder));
+                .forEach(windowCallback ->
+                        ((WindowCloseCallback) windowCallback).onWindowClose(
+                                event.getPlayer(),
+                                new WindowAction(holder, WindowAction.WindowActionType.CLOSE))
+                );
     }
 }

@@ -61,27 +61,40 @@ public class MenuWindow {
         return itemClickCallbackMap;
     }
 
+    public MenuWindow withItem(int slot, ItemStack itemStack) {
+        if(slot >= 0 && this.inventory.getSize() > slot)
+            this.inventory.setItem(slot, itemStack);
+        return this;
+    }
+
     public MenuWindow withItem(ItemStack itemStack) {
         return this.withItem(this.findFirstFreeSlot(), itemStack);
+    }
+
+    public MenuWindow withItem(int slot, ItemStack itemStack, ItemClickCallback itemClickCallback) {
+        if(slot >= 0 && this.inventory.getSize() > slot)
+            this.itemClickCallbackMap.put(slot, itemClickCallback);
+        return this.withItem(slot, itemStack);
     }
 
     public MenuWindow withItem(ItemStack itemStack, ItemClickCallback itemClickCallback) {
         return this.withItem(this.findFirstFreeSlot(), itemStack, itemClickCallback);
     }
 
-    public MenuWindow withItem(int slot, ItemStack itemStack) {
-        if(slot >= 0 && this.inventory.getSize() >= slot)
-            this.inventory.setItem(slot, itemStack);
+    public MenuWindow withItemAction(int slot, ItemClickCallback itemClickCallback) {
+        if(slot >= 0 && this.inventory.getSize() > slot)
+            this.itemClickCallbackMap.put(slot, itemClickCallback);
         return this;
     }
 
-    public MenuWindow withItem(int slot, ItemStack itemStack, ItemClickCallback itemClickCallback) {
-        if(slot >= 0 && this.inventory.getSize() >= slot)
-            this.itemClickCallbackMap.put(slot, itemClickCallback);
-        return this.withItem(slot, itemStack);
+    public MenuWindow withItemAction(ItemStack itemStack, ItemClickCallback itemClickCallback) {
+        return this.withItemAction(this.findItemSlot(itemStack), itemClickCallback);
     }
 
     public MenuWindow fillEmptySlots(int start, int end, ItemStack itemStack) {
+        if(start > this.inventory.getSize())
+            start = 0;
+
         if(end > this.inventory.getSize())
             end = this.inventory.getSize();
 
@@ -97,7 +110,14 @@ public class MenuWindow {
     }
 
     public MenuWindow fillEmptySlots(ItemStack itemStack) {
-        return this.fillEmptySlots(0, this.inventory.getSize(), itemStack);
+        return this.fillEmptySlots(0, itemStack);
+    }
+
+    public int findItemSlot(ItemStack itemStack) {
+        for(int i = 0; i < this.inventory.getSize(); ++i)
+            if(this.inventory.getItem(i).equals(itemStack))
+                return i;
+        return -1;
     }
 
     /**

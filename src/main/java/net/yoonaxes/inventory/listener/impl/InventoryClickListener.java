@@ -1,5 +1,6 @@
 package net.yoonaxes.inventory.listener.impl;
 
+import net.yoonaxes.inventory.actions.ItemClickAction;
 import net.yoonaxes.inventory.callback.ItemClickCallback;
 import net.yoonaxes.inventory.gui.MenuHolder;
 import net.yoonaxes.inventory.gui.MenuWindow;
@@ -35,6 +36,13 @@ public class InventoryClickListener extends ListenerHandler<InventoryClickEvent>
         if(callback == null)
             return;
 
-        callback.onClick(event.getWhoClicked(), event.getClick(), holder);
+        callback.onClick(event.getWhoClicked(),
+                new ItemClickAction(
+                        holder,
+                        event.getClick(),
+                        event.getRawSlot(),
+                        event.getCursor()
+                )
+        );
     }
 }

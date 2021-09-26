@@ -11,7 +11,6 @@ import org.bukkit.plugin.Plugin;
 /**
  * An open source Bukkit util for Inventory API.
  * This API is used to facilitate the creation of interactive inventory.
- * TODO: Clickable Item System
  * @author yoonaxes
  */
 public final class MinecraftInventoryAPI {
