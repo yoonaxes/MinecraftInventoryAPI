@@ -22,7 +22,7 @@ public final class MinecraftInventoryAPI {
     private ColorTranslator colorTranslator;
 
     /**
-     * Create a new instance
+     * Create a instance of MinecraftInventoryAPI.
      */
     public MinecraftInventoryAPI() {
         INSTANCE = this;

@@ -1,5 +1,9 @@
 package net.yoonaxes.inventory.gui;
 
+/**
+ * Simplify Inventory Chest Row System.
+ * @author yoonaxes
+ */
 public enum Rows {
 
     ONE(9),

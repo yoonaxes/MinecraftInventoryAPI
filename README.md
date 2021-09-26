@@ -23,7 +23,7 @@ Initial setup to start using InventoryAPI.
 <dependency>
   <groupId>net.yoonaxes.minecraft</groupId>
   <artifactId>inventoryapi</artifactId>
-  <version>0.8</version>
+  <version>0.9</version>
 </dependency>
 ```
 
@@ -38,12 +38,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.yoonaxes.minecraft:inventoryapi:0.8'
+    implementation 'net.yoonaxes.minecraft:inventoryapi:0.9'
 }
 ```
 
 ##### Download:
-**·** [Download InventoryAPI-0.8.jar](https://github.com/yoonaxes/MinecraftInventoryAPI/releases/download/0.8/MessageAPI-0.8.jar)
+**·** [Download InventoryAPI-0.9.jar](https://github.com/yoonaxes/MinecraftInventoryAPI/releases/download/0.9/MessageAPI-0.9.jar)
 
 **·** [Download other release](https://github.com/yoonaxes/MinecraftInventoryAPI/releases/)
 
@@ -77,11 +77,11 @@ public class ExampleMenu extends MenuWindow {
             humanEntity.sendMessage("Menu closed.");
         });
         
+        this.createItems(); /* Make create items method */
+
         /* You can fill empty slots with glass, add more Window Callbacks, add more items etc...
          * Example to fill empty slots with glass:
          * - this.fillEmptySlots(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).withName("&8#").build()); */
-        
-        this.createItems(); /* Make create items method */
     }
 
     private void createItems() {

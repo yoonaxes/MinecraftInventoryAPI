@@ -28,46 +28,114 @@ public class ItemBuilder {
 
     private String displayName;
     private final List<String> loreList = Lists.newArrayList();
+    private final List<ItemFlag> itemFlagList = Lists.newArrayList();
     private final Map<Enchantment, Integer> enchantmentMap = Maps.newHashMap();
 
-    private boolean glowing = false;
-
+    /**
+     * Create a instance of ItemBuilder.
+     * @param material Bukkit Material
+     * @param amount amount
+     * @param durability damage
+     */
     public ItemBuilder(Material material, int amount, short durability) {
         this.material = material;
         this.amount = amount;
         this.durability = durability;
     }
 
+    /**
+     * Create a instance of ItemBuilder.
+     * @param material Bukkit Material
+     * @param amount amount
+     */
     public ItemBuilder(Material material, int amount) {
         this(material, amount, (short) 0);
     }
 
+    /**
+     * Create a instance of ItemBuilder.
+     * @param material Bukkit Material
+     */
     public ItemBuilder(Material material) {
         this(material, 1);
     }
 
+    /**
+     * Set durability to item.
+     * @param durability short damage
+     * @return ItemBuilder
+     */
     public ItemBuilder withDurability(short durability) {
         this.durability = durability;
         return this;
     }
 
+    /**
+     * Set display name of item.
+     * @param displayName Display Name Stirng
+     * @return ItemBuilder
+     */
     public ItemBuilder withName(String displayName) {
         this.displayName = displayName;
         return this;
     }
 
+    /**
+     * Add lore to item.
+     * @param lores String lore array
+     * @return ItemBuilder
+     */
     public ItemBuilder withLore(String... lores) {
         this.loreList.addAll(Arrays.asList(lores));
         return this;
     }
 
+    /**
+     * Add ItemFlag to item.
+     * @param itemFlags Bukkit ItemFlag array
+     * @return ItemBuilder
+     */
+    public ItemBuilder withItemFlag(ItemFlag... itemFlags) {
+        this.itemFlagList.addAll(Arrays.asList(itemFlags));
+        return this;
+    }
+
+    /**
+     * Add enchantment to item.
+     * @param enchantment Bukkit Enchantment
+     * @param level Level of enchantment
+     * @return ItemBuilder
+     */
     public ItemBuilder withEnchantment(Enchantment enchantment, int level) {
         this.enchantmentMap.put(enchantment, level);
         return this;
     }
 
+    /**
+     * Add Glow to item.
+     * Adds ItemFlag.HIDE_ENCHANTS.
+     * Adds Enchantment.ARROW_INFINITE level 0.
+     * @return ItemBuilder
+     */
     public ItemBuilder withGlow() {
-        this.glowing = true;
+        this.itemFlagList.add(ItemFlag.HIDE_ENCHANTS);
+        this.enchantmentMap.put(Enchantment.ARROW_INFINITE, 0);
+        return this;
+    }
+
+    /**
+     * Adds Attributes to item:
+     * - HIDE_ATTRIBUTES
+     * - HIDE_UNBREAKABLE
+     * - HIDE_DYE
+     * @return ItemBuilder
+     */
+    public ItemBuilder withHiddenAttributes() {
+        this.itemFlagList.addAll(Arrays.asList(
+                ItemFlag.HIDE_ATTRIBUTES,
+                ItemFlag.HIDE_UNBREAKABLE,
+                ItemFlag.HIDE_DYE
+        ));
         return this;
     }
 
@@ -86,27 +154,21 @@ public class ItemBuilder {
 
         // Set Display Name
         if(this.displayName != null)
-            itemMeta.setDisplayName(
-                    COLOR_TRANSLATOR.translateString(this.displayName)
-            );
+            itemMeta.setDisplayName(COLOR_TRANSLATOR.translateString(this.displayName));
 
         // Set Lore
-        itemMeta.setLore(
-                COLOR_TRANSLATOR.translateList(this.loreList)
-        );
+        if(this.loreList.size() > 0)
+            itemMeta.setLore(COLOR_TRANSLATOR.translateList(this.loreList));
+
+        // Add ItemFlags
+        this.itemFlagList.forEach(itemMeta::addItemFlags);
 
         // Add Enchantments
         this.enchantmentMap.forEach((enchantment, level) ->
                 itemMeta.addEnchant(enchantment, level, true)
         );
 
-        // Add glow to item
-        if(this.glowing && itemMeta.getEnchants().size() == 0) {
-            itemMeta.addEnchant(Enchantment.ARROW_INFINITE, 0, true);
-            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
-
-        // Set ItemMeta to return ItemStack.
+        // Set ItemMeta for ItemStack.
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
