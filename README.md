@@ -67,7 +67,6 @@ public class ExampleMenu extends MenuWindow {
 
     public ExampleMenu(Player player) {
         super("&8{>} &7Menu &f" + player.getName() + " &8| &7MinecraftInventoryAPI", Rows.ONE);
-        this.createItems();
         
         /* Window callbacks */
         this.withWindowCallback((WindowOpenCallback) (humanEntity, windowAction) -> {
@@ -81,6 +80,8 @@ public class ExampleMenu extends MenuWindow {
         /* You can fill empty slots with glass, add more Window Callbacks, add more items etc...
          * Example to fill empty slots with glass:
          * - this.fillEmptySlots(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).withName("&8#").build()); */
+        
+        this.createItems(); /* Make create items method */
     }
 
     private void createItems() {
