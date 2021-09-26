@@ -103,7 +103,8 @@ public class ExampleMenu extends MenuWindow {
                         "&7Give star on Github.",
                         "&7Click to take a link."
                 )
-                .build());
+                .build()
+        );
         
         /* Add action to item on 8 slot in inventory */
         this.withItemAction(8, (humanEntity, itemClickAction) -> {
