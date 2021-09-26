@@ -69,8 +69,8 @@ public class ExampleMenu extends MenuWindow {
 
     private void create() {
         this.withItem(new ItemBuilder(Material.DIAMOND_SWORD).withName("&bFighting").withLore("&7Always :)").build());
-        this.withItem(new ItemBuilder(Material.WATER_BUCKET).withName("&bSwimming").withName("&7If you can, swim :D").build());
-        this.withItem(new ItemBuilder(Material.IRON_PICKAXE).withName("&bMinning").withName("&7If you want you can minning :P").build());
+        this.withItem(new ItemBuilder(Material.WATER_BUCKET).withName("&bSwimming").withLore("&7If you can, swim :D").build());
+        this.withItem(new ItemBuilder(Material.IRON_PICKAXE).withName("&bMinning").withLore("&7If you want you can minning :P").build());
         this.withItem(8, new ItemBuilder(Material.EMERALD)
                 .withName("&aIt's awesome!")
                 .withLore(
