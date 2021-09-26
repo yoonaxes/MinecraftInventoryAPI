@@ -84,3 +84,5 @@ public class ExampleMenu extends MenuWindow {
     }
 }
 ```
+
+<hr />
