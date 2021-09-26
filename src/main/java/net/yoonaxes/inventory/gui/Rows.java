@@ -36,11 +36,11 @@ public enum Rows {
 
     /**
      * Find row by number.
-     * @param rows Row number
+     * @param number Rows number
      * @return Finded Row
      */
-    public static Rows getRow(int rows) {
-        switch(rows) {
+    public static Rows getRow(int number) {
+        switch(number) {
             case 1: {
                 return Rows.ONE;
             }

@@ -1,6 +1,8 @@
 package net.yoonaxes.inventory.listener.impl;
 
+import net.yoonaxes.inventory.callback.ItemClickCallback;
 import net.yoonaxes.inventory.gui.MenuHolder;
+import net.yoonaxes.inventory.gui.MenuWindow;
 import net.yoonaxes.inventory.listener.ListenerHandler;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -24,8 +26,15 @@ public class InventoryClickListener extends ListenerHandler<InventoryClickEvent>
             return;
 
         MenuHolder holder = (MenuHolder) inventory.getHolder();
+        MenuWindow window = holder.getWindow();
 
         event.setResult(Event.Result.DENY);
         event.setCancelled(true);
+
+        ItemClickCallback callback = window.getItemClickCallbackMap().get(event.getRawSlot());
+        if(callback == null)
+            return;
+
+        callback.onClick(event.getWhoClicked(), event.getClick(), holder);
     }
 }
