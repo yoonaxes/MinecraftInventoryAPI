@@ -31,6 +31,8 @@ public class MenuWindow {
     private final List<WindowCallback> windowCallbackList = new ArrayList<>();
     private final HashMap<Integer, ItemClickCallback> itemClickCallbackMap = new HashMap<>();
 
+    private boolean allowPlayerInventoryClick = false;
+
     /**
      * Create a instance of MenuWindow.
      * @param title Inventory title
@@ -199,6 +201,22 @@ public class MenuWindow {
      */
     public MenuWindow fillEmptySlots() {
         return this.fillEmptySlots(DEFAULT_FILL_EMPTY_ITEMSTACK);
+    }
+
+    /**
+     * Set a llow to click player inventory.
+     * @param allowPlayerInventoryClick Allow to Player Inventory Click
+     */
+    public void setAllowPlayerInventoryClick(boolean allowPlayerInventoryClick) {
+        this.allowPlayerInventoryClick = allowPlayerInventoryClick;
+    }
+
+    /**
+     * Get a allow to click player inventory.
+     * @return Player Inventory Click allow boolean
+     */
+    public boolean isAllowPlayerInventoryClick() {
+        return allowPlayerInventoryClick;
     }
 
     /**

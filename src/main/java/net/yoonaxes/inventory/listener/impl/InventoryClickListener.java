@@ -8,6 +8,7 @@ import net.yoonaxes.inventory.listener.ListenerHandler;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
@@ -21,7 +22,10 @@ public class InventoryClickListener extends ListenerHandler<InventoryClickEvent>
     @Override
     @EventHandler(priority = EventPriority.NORMAL)
     protected void onEvent(InventoryClickEvent event) {
-        Inventory inventory = event.getInventory();
+        Inventory inventory = event.getView().getTopInventory();
+        Inventory clickedInventory = event.getClickedInventory();
+        if(inventory == null || clickedInventory == null)
+            return;
 
         if(!(inventory.getHolder() instanceof MenuHolder))
             return;
@@ -29,18 +33,32 @@ public class InventoryClickListener extends ListenerHandler<InventoryClickEvent>
         MenuHolder holder = (MenuHolder) inventory.getHolder();
         MenuWindow window = holder.getWindow();
 
-        event.setResult(Event.Result.DENY);
-        event.setCancelled(true);
+        ClickType click = event.getClick();
+        if(window.isAllowPlayerInventoryClick()) {
+            if(click.isShiftClick() || click.isKeyboardClick()) {
+                event.setResult(Event.Result.DENY);
+                event.setCancelled(true);
+            } else {
+                if(inventory.getType() == clickedInventory.getType()) {
+                    event.setResult(Event.Result.DENY);
+                    event.setCancelled(true);
+                }
+            }
+        } else {
+            event.setResult(Event.Result.DENY);
+            event.setCancelled(true);
+        }
 
-        ItemClickCallback callback = window.getItemClickCallbackMap().get(event.getRawSlot());
+        int slot = event.getRawSlot();
+        ItemClickCallback callback = window.getItemClickCallbackMap().get(slot);
         if(callback == null)
             return;
 
         callback.onClick(event.getWhoClicked(),
                 new ItemClickAction(
                         holder,
-                        event.getClick(),
-                        event.getRawSlot(),
+                        click,
+                        slot,
                         event.getCursor()
                 )
         );

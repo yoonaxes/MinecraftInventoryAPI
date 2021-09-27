@@ -2,7 +2,6 @@ package net.yoonaxes.inventory;
 
 import net.yoonaxes.inventory.listener.impl.InventoryClickListener;
 import net.yoonaxes.inventory.listener.impl.InventoryCloseListener;
-import net.yoonaxes.inventory.listener.impl.InventoryInteractListener;
 import net.yoonaxes.inventory.listener.impl.InventoryOpenListener;
 import net.yoonaxes.translator.ColorTranslator;
 import net.yoonaxes.translator.impl.DefaultColorTranslator;
@@ -41,7 +40,6 @@ public final class MinecraftInventoryAPI {
         new InventoryOpenListener(plugin);
         new InventoryCloseListener(plugin);
         new InventoryClickListener(plugin);
-        new InventoryInteractListener(plugin);
     }
 
     /**
