@@ -23,7 +23,7 @@ Initial setup to start using InventoryAPI.
 <dependency>
   <groupId>net.yoonaxes.minecraft</groupId>
   <artifactId>inventoryapi</artifactId>
-  <version>0.9</version>
+  <version>1.0</version>
 </dependency>
 ```
 
@@ -38,12 +38,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.yoonaxes.minecraft:inventoryapi:0.9'
+    implementation 'net.yoonaxes.minecraft:inventoryapi:1.0'
 }
 ```
 
 ##### Download:
-**·** [Download InventoryAPI-0.9.jar](https://github.com/yoonaxes/MinecraftInventoryAPI/releases/download/0.9/MessageAPI-0.9.jar)
+**·** [Download InventoryAPI-1.0.jar](https://github.com/yoonaxes/MinecraftInventoryAPI/releases/download/1.0/InventoryAPI-1.0.jar)
 
 **·** [Download other release](https://github.com/yoonaxes/MinecraftInventoryAPI/releases/)
 
