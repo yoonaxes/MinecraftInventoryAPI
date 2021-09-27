@@ -22,8 +22,8 @@ import java.util.Map;
  */
 public class MenuWindow {
 
-    private static final ColorTranslator COLOR_TRANSLATOR = MinecraftInventoryAPI.getColorTranslator();
     private static final ItemStack DEFAULT_FILL_EMPTY_ITEMSTACK = new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).withName("&8#").build();
+    private static final ColorTranslator COLOR_TRANSLATOR = MinecraftInventoryAPI.getColorTranslator();
 
     private final MenuHolder holder;
     private final Inventory inventory;
