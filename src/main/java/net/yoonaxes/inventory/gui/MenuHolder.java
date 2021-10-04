@@ -16,7 +16,7 @@ public class MenuHolder implements InventoryHolder {
      * Create a instance of MenuHolder.
      * @param window MenuWindow
      */
-    public MenuHolder(MenuWindow window) {
+    public MenuHolder (MenuWindow window) {
         this.window = window;
     }
 
